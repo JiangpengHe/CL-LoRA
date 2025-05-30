@@ -5,7 +5,7 @@
 
 This repository contains the official PyTorch implementation of **CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning**, accepted at CVPR 2025.
 
-📄 **Paper**: [CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning](https://openaccess.thecvf.com/content/CVPR2024/html/He_Gradient_Reweighting_Towards_Imbalanced_Class-Incremental_Learning_CVPR_2024_paper.html)
+📄 **Paper**: [CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning](https://cvpr.thecvf.com/Conferences/2025/AcceptedPapers)
 
 ## Overview
 
