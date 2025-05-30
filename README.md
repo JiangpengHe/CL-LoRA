@@ -1,64 +1,99 @@
-# CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning [CVPR 2025] 
+# CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning
 
-This repository is the official PyTorch implementation of **CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning** [[paper]](https://openaccess.thecvf.com/content/CVPR2024/html/He_Gradient_Reweighting_Towards_Imbalanced_Class-Incremental_Learning_CVPR_2024_paper.html).
+[![CVPR 2025](https://img.shields.io/badge/CVPR-2025-blue.svg)]([https://openaccess.thecvf.com/content/CVPR2024/html/He_Gradient_Reweighting_Towards_Imbalanced_Class-Incremental_Learning_CVPR_2024_paper.html](https://cvpr.thecvf.com/))
+[![PyTorch](https://img.shields.io/badge/PyTorch-Implementation-red.svg)](https://pytorch.org/)
 
-## Running with Pre-trained Models:
-The implementation of our method **CL-LoRA** is also available in **LAMDA-PILOT**: https://github.com/sun-hailong/LAMDA-PILOT
+This repository contains the official PyTorch implementation of **CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning**, accepted at CVPR 2025.
 
+📄 **Paper**: [CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning](https://openaccess.thecvf.com/content/CVPR2024/html/He_Gradient_Reweighting_Towards_Imbalanced_Class-Incremental_Learning_CVPR_2024_paper.html)
 
-## Training Instructions
+## Overview
 
-To run the code, navigate to /script/ and execute the provided bash script with the following format:
+CL-LoRA introduces a novel approach for class-incremental learning without rehearsal, leveraging low-rank adaptation techniques to efficiently learn new classes while preserving knowledge of previously learned tasks.
+
+## Getting Started
+
+### Training
+
+To train the model, navigate to the main directory and run:
 
 ```
-bash main.sh <approach> <gpu> <dataset> <scenario> <initial_classes> <total_tasks>
+python main.py <json_config_path>
 ```
 
-### Parameter Specifications:
+### Supported Datasets
 
-- `<approach>`: Approach to be used, located in `./src/approaches/`.
-  - `DGR`: our proposed Decoupled Gradients Reweighting (DGR) method.
-- `<gpu>`: Index of the GPU to run the experiment.
-- `<dataset>`: Dataset to be used (Options: `cifar100`, `imagenet_subset`, `imagenet_1000`, `Food101`).
-- `<scenario>`: Learning scenario, including:
-  - `conv`: Conventional CIL.
-  - `lt`: Shuffled long-tailed scenario (experiments in main paper).
-  - `ltio`: Ordered long-tailed scenario.
-- `<initial_classes>`: Number of classes in the first base task.
-- `<total_tasks>`: Total number of tasks (including the base task).
+The following datasets are supported with pre-configured JSON files:
 
-### Examples:
-
-- Shuffled long-tailed case with LFS, 20 tasks on CIFAR100:
+#### CIFAR-100
 ```
-bash main.sh DGR 0 cifar100 lt 5 20
+python main.py ./exps/cifar.json
 ```
 
-- Shuffled long-tailed case with LFH, 10 tasks on ImageNetSubset:
+#### ImageNet-R
 ```
-bash main.sh DGR 0 imagenet_subset lt 50 11
-```
-
-- Ordered long-tailed case with LFH, 5 tasks on Food101:
-```
-bash main.sh DGR 0 Food101 ltio 51 6
+python main.py ./exps/inr.json
 ```
 
-- Conventional case with LFS, 10 tasks on ImageNet_1000:
+#### ImageNet-A
 ```
-bash main.sh DGR 0 imagenet_1000 conv 100 10
+python main.py ./exps/ina.json
 ```
 
-
-### Reference:
-If you find this work useful, please cite us by: 
+#### VTAB
 ```
-@article{He_2025_CVPR,
-    author    = {He, Jiangpeng},
-    title     = {CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning},
-    journal = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-    month     = {June},
-    year      = {2024},
-    pages     = {16668-16677}
+python main.py ./exps/vtab.json
+```
+
+### Configuration
+
+The JSON configuration files contain experiment setup and hyperparameters. Key CL-LoRA specific parameters include:
+
+- **`general_pos`**: Position indices for task-shared LoRA adapters
+- **`specific_pos`**: Position indices for task-specific LoRA adapters  
+- **`msa`**: Multi-Head Self-Attention adaptation settings for Query (Q), Key (K), and Value (V)
+  - `1`: Apply adaptation
+  - `0`: No adaptation
+
+### Example Configuration
+
+```json
+{
+  "msa": [1, 0, 1],
+  "general_pos": [0, 1, 2, 3, 4, 5],
+  "specific_pos": [6, 7, 8, 9, 10, 11]
 }
 ```
+
+This configuration:
+- Adapts Q and V in Multi-Head Self-Attention (`msa`: [1, 0, 1])
+- Uses task-shared LoRA in the first 6 ViT blocks (`general_pos`)
+- Uses task-specific LoRA in the last 6 ViT blocks (`specific_pos`)
+
+## Citation
+
+If you find this work useful in your research, please cite:
+
+```bibtex
+@article{He_2025_CVPR,
+    author    = {He, Jiangpeng and Duan, Zhihao and Zhu, Fengqing},
+    title     = {CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2025}
+}
+```
+
+## Acknowledgments
+
+This implementation builds upon the **LAMDA-PILOT** framework. 
+
+**LAMDA-PILOT Repository**: https://github.com/sun-hailong/LAMDA-PILOT
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For questions or issues, please open an issue on GitHub or contact the authors.
