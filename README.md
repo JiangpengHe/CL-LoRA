@@ -1,11 +1,11 @@
 # CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning
 
-[![CVPR 2025](https://img.shields.io/badge/CVPR-2025-blue.svg)]([https://arxiv.org/pdf/2505.24816](https://cvpr.thecvf.com/))
+[![CVPR 2025](https://img.shields.io/badge/CVPR-2025-blue.svg)](https://cvpr.thecvf.com/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-Implementation-red.svg)](https://pytorch.org/)
 
 This repository contains the official PyTorch implementation of **CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning**, accepted at CVPR 2025.
 
-📄 **Paper**: [CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning](https://cvpr.thecvf.com/Conferences/2025/AcceptedPapers)
+📄 **Paper**: [CL-LoRA: Continual Low-Rank Adaptation for Rehearsal-Free Class-Incremental Learning](https://arxiv.org/abs/2505.24816)
 
 ## Overview
 
