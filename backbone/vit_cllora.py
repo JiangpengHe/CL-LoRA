@@ -365,7 +365,6 @@ class VisionTransformer(nn.Module):
             self.block_weight_list.append(self.block_weight_old.requires_grad_(False))
             self.block_weight = nn.Parameter(torch.randn(3, len(self.specfic_pos)))
             nn.init.uniform_(self.block_weight, .5, 1.5)
-            print(self.block_weight_list)
 
 
         self.adapter_pos_list.append(self.adapt_pos)
