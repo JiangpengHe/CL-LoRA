@@ -13,6 +13,14 @@ CL-LoRA introduces a novel approach for class-incremental learning without rehea
 
 ## Getting Started
 
+### Environments
+- `python==3.9.4`
+- `torch==2.0.1`
+- `torchvision==0.15.2`
+- `timm==0.6.12`
+- `numpy==1.25.2`
+- `scikit-learn==1.2.0`
+- `cudatoolkit==11.1`
 ### Training
 
 To train the model, navigate to the main directory and run:
